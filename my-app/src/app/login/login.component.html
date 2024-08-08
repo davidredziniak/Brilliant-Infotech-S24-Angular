@@ -1,12 +1,13 @@
+<h1 class="text-center mt-5">User Login</h1>
 <div class="container w-50">
-    <form ngNativeValidate [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="container w-50 mt-5">
+    <form ngNativeValidate [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="user-form container w-50 p-5 mt-5">
         <div>
           <label for="username" class="form-label">Username</label>
-          <input type="text" id="username" formControlName="username" class="form-control" required>
+          <input type="text" id="username" formControlName="username" class="form-control mt-1" required>
         </div>
         <div>
-          <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" formControlName="password" class="form-control" required>
+          <label for="password" class="form-label mt-2">Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control mt-1" required>
         </div>
         <button type="submit" class="btn btn-primary mt-4">Login</button>
     </form>
