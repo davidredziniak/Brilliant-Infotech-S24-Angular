@@ -26,7 +26,7 @@ export class LoginComponent {
 
     // Check if user is not authenticated
     if (!this.auth.login(username, password)) {
-      console.log('Login failed');
+      alert("Failed to sign in, incorrect username and password.");
     }
   }
 }

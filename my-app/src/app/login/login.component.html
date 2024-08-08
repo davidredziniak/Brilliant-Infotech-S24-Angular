@@ -1,11 +1,14 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="username">Username</label>
-    <input type="text" id="username" formControlName="username" />
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password" />
-  </div>
-  <button type="submit">Login</button>
-</form>
+<div class="container w-50">
+    <form ngNativeValidate [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="container w-50 mt-5">
+        <div>
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" formControlName="username" class="form-control" required>
+        </div>
+        <div>
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Login</button>
+    </form>
+</div>
+
