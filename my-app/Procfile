@@ -1,1 +1,1 @@
-web: npm run server:ssr:my-app
+web: npm run serve:ssr:my-app
