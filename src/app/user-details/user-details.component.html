@@ -62,7 +62,7 @@
         <div class="row mt-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">Country:</span>
-                <select class="form-select" name="country" id="country" required>
+                <select id="country" formControlName="country" class="form-select" required>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Aland Islands">Aland Islands</option>
                     <option value="Albania">Albania</option>
@@ -310,7 +310,12 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-4">Next</button>
+        <div class="row mt-4 mb-3">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mt-4">Next</button>
+            </div>
+        </div>
     </form>
 </div>
-

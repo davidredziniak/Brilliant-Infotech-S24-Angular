@@ -1,0 +1,42 @@
+<h1 class="text-center mt-5">Personal Details</h1>
+<div class="container w-50 mb-5">
+    <form ngNativeValidate [formGroup]="personalForm" (ngSubmit)="onSubmit()" class="user-form container w-75 p-5 mt-5">
+        <div class="row mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Occupation:</span>
+                <input type="text" id="occupation" formControlName="occupation" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Hobbies:</span>
+                <input type="text" id="hobbies" formControlName="hobbies" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Places Visited:</span>
+                <textarea id="visited" formControlName="visited" class="form-control" aria-label="With textarea"></textarea>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Favorite Artist:</span>
+                <input type="text" id="artist" formControlName="artist" class="form-control" required>
+            </div>
+        </div>        
+        <div class="row mt-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Favorite Musician:</span>
+                <input type="text" id="musician" formControlName="musician" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mt-4 mb-3">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
