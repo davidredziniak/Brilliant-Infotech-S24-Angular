@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { Component } from "@angular/core";
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  ReactiveFormsModule,
+} from "@angular/forms";
+import { AuthService } from "../auth.service";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: "./login.component.html",
+  styleUrl: "./login.component.css",
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -15,8 +20,8 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private auth: AuthService) {
     // Require form group to have username and password filled
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
 
@@ -25,7 +30,7 @@ export class LoginComponent {
     const { username, password } = this.loginForm.value;
 
     // Check if any fields are empty
-    if (username === "" || password === ""){
+    if (username === "" || password === "") {
       alert("All fields must be filled out.");
     }
 
