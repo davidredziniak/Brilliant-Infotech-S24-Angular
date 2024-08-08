@@ -27,8 +27,10 @@ export class PersonalDetailsComponent {
     const { occupation, hobbies, visited, artist, musician } = this.personalForm.value;
 
     // Check if any required fields are empty
-    if (occupation === "" || hobbies === "" || visited === "" || artist === "" || musician){
+    if (occupation === "" || hobbies === "" || visited === "" || artist === "" || musician === ""){
       alert("All required fields must be filled out.");
+    } else {
+      alert("Successfully submitted!");
     }
   }
 
