@@ -1,6 +1,6 @@
-<h1 class="text-center mt-5">User Login</h1>
+<h1 class="text-center mt-5">User Registration</h1>
 <div class="container w-50">
-  <form ngNativeValidate [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="user-form container w-50 p-5 mt-5">
+  <form ngNativeValidate [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="user-form container w-50 p-5 mt-5">
     <div>
       <label for="username" class="form-label">Username</label>
       <input type="text" id="username" formControlName="username" class="form-control mt-1" required>
@@ -9,12 +9,16 @@
       <label for="password" class="form-label mt-2">Password</label>
       <input type="password" id="password" formControlName="password" class="form-control mt-1" required>
     </div>
+    <div>
+      <label for="confirm" class="form-label mt-2">Confirm Password</label>
+      <input type="password" id="confirm" formControlName="confirm" class="form-control mt-1" required>
+    </div>
     <div class="row mt-4 mb-3">
       <div class="col-md-6">
-        <a routerLink="/register" class="btn btn-danger mt-4">Register</a>
+        <a routerLink="/login" class="btn btn-danger mt-4">Back to Login</a>
       </div>
       <div class="col-md-6 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary mt-4">Login</button>
+        <button type="submit" class="btn btn-primary mt-4">Register</button>
       </div>
     </div>
   </form>

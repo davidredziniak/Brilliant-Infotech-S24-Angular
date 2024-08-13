@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StorageService } from '../_services/storage.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-details',
@@ -11,8 +14,10 @@ import { Router } from '@angular/router';
 })
 export class UserDetailsComponent {
   contactForm: FormGroup;
+  httpOptions: { headers: HttpHeaders };
+  private apiUrl = environment.apiUrl;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private storage: StorageService, private router: Router) {
     // Require form group to have all input fields
     this.contactForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -26,6 +31,7 @@ export class UserDetailsComponent {
       zip: ['', Validators.required],
       country: ['United States', Validators.required]
     });
+    this.httpOptions = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.storage.getToken() }) };
   }
 
   // Function that is called when user submits the form
@@ -37,7 +43,15 @@ export class UserDetailsComponent {
       alert("All required fields must be filled out.");
     } else {
       // Redirect since all fields are filled out
-      this.router.navigate(['/personal']);
+      this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }, this.httpOptions).subscribe({
+        next: res => {
+          alert(res.message);
+          this.router.navigate(['/personal']);
+        },
+        error: err => {
+          alert(err.error.message);
+        }
+      });
     }
   }
 }
