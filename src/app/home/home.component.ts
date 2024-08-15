@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
         error: (err) => {
           if (typeof window !== "undefined") {
             alert(err.error.error);
+            this.logout();
           }
         },
       });
