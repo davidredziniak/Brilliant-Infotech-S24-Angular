@@ -35,6 +35,7 @@ export class PersonalDetailsComponent {
     if (occupation === "" || hobbies === "" || visited === "" || artist === "" || musician === ""){
       alert("All required fields must be filled out.");
     } else {
+      // API call to submit personal details for user
       this.http.post<any>(this.apiUrl + "/personal", { occupation, hobbies, visited, artist, musician }, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.user.currentToken })}).subscribe({
         next: res => {
           alert(res.message);

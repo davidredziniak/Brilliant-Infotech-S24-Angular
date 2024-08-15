@@ -1,11 +1,73 @@
-
-<div *ngIf="user">
-    <h1 class="text-center mt-5">Welcome, {{ user.username }}!</h1>
-    <div class="container w-50">
-        <p>Email: {{ user.userDetails.email }}</p>
-        <p>Full Name: {{ user.userDetails.firstName }} {{ user.userDetails.lastName }}</p>
+<div *ngIf="user" class="container w-75">
+    <div class="row">
+        <div class="col-md-10">
+            <h1 class="text-center mt-5">
+                Welcome, {{ user.username }}!
+            </h1>
+        </div>
+        <div class="col-md-2">
+            <button (click)="logout()" class="btn btn-danger mt-5">Logout</button>
+        </div>
     </div>
-    <button (click)="logout()" class="btn btn-danger">Logout</button>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container-lg mt-5 p-5 rounded-2" style="background-color: #ffffff">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>User Details</h3>
+                        <hr />
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label><b>Name:</b></label>
+                                <p class="text-muted">
+                                    {{ user.userDetails.firstName }}
+                                    {{ user.userDetails.lastName }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label><b>Email:</b></label>
+                                <p class="text-muted">{{ user.userDetails.email }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label><b>Role:</b></label>
+                                <p class="text-muted">{{ user.role.toUpperCase() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Address</h3>
+                        <hr />
+                        <div class="col-md-12 mt-4">
+                            <div class="mb-3">
+                                <p class="text-muted">
+                                    {{ user.userDetails.addressOne }}
+                                    {{ user.userDetails.addressTwo }}<br />
+                                    {{ user.userDetails.city }}, {{ user.userDetails.state }},
+                                    {{ user.userDetails.zip }}<br />
+                                    {{ user.userDetails.country }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container-lg mt-5 p-5 rounded-2" style="background-color: #ffffff">
+                <h5>Personal Details</h5>
+                <hr />
+                <p><b>Occupation:</b> {{ user.personalDetails.occupation }}</p>
+                <p><b>Hobbies:</b> {{ user.personalDetails.hobbies }}</p>
+                <p><b>Cities Visited:</b> {{ user.personalDetails.visited }}</p>
+                <p><b>Favorite Artist:</b> {{ user.personalDetails.artist }}</p>
+                <p><b>Favorite Musician:</b> {{ user.personalDetails.musician }}</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="!user">

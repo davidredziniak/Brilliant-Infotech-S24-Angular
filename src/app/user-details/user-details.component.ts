@@ -40,7 +40,7 @@ export class UserDetailsComponent {
     if (firstName === "" || lastName === "" || email === "" || phoneNumber === "" || addressOne === "" || city === "" || state === "" || zip === "" || country === ""){
       alert("All required fields must be filled out.");
     } else {
-      // Redirect since all fields are filled out
+      // API call to submit user details
       this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.user.currentToken })}).subscribe({
         next: res => {
           alert(res.message);

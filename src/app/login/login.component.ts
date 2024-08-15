@@ -5,20 +5,24 @@ import {
   FormBuilder,
   ReactiveFormsModule,
 } from "@angular/forms";
-import { Router } from '@angular/router';
+import { Router, RouterModule } from "@angular/router";
 import { AuthService } from "../_services/auth.service";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.css",
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private auth: AuthService
+  ) {
     // Require form group to have username and password filled
     this.loginForm = this.fb.group({
       username: ["", Validators.required],
@@ -28,7 +32,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.auth.isAuthenticated()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(["/home"]);
     }
   }
 
@@ -44,8 +48,7 @@ export class LoginComponent implements OnInit{
 
     // Try to login the user
     this.auth.login(username, password);
-    
+
     return true;
   }
-  
 }
