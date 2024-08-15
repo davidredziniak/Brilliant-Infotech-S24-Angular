@@ -1,0 +1,13 @@
+
+<div *ngIf="user">
+    <h1 class="text-center mt-5">Welcome, {{ user.username }}!</h1>
+    <div class="container w-50">
+        <p>Email: {{ user.userDetails.email }}</p>
+        <p>Full Name: {{ user.userDetails.firstName }} {{ user.userDetails.lastName }}</p>
+    </div>
+    <button (click)="logout()" class="btn btn-danger">Logout</button>
+</div>
+
+<div *ngIf="!user">
+    <p>Loading user details...</p>
+</div>

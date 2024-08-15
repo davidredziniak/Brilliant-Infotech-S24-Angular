@@ -1,29 +1,35 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   Validators,
   FormBuilder,
   ReactiveFormsModule,
 } from "@angular/forms";
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from "../_services/auth.service";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule],
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.css",
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
     // Require form group to have username and password filled
     this.loginForm = this.fb.group({
       username: ["", Validators.required],
       password: ["", Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate(['/home']);
+    }
   }
 
   // Function that is called when user submits the form
@@ -41,4 +47,5 @@ export class LoginComponent {
     
     return true;
   }
+  
 }

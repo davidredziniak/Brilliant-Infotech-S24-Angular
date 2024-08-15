@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StorageService } from '../_services/storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-user-details',
@@ -14,10 +14,9 @@ import { environment } from '../../environments/environment';
 })
 export class UserDetailsComponent {
   contactForm: FormGroup;
-  httpOptions: { headers: HttpHeaders };
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private storage: StorageService, private router: Router) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private user: UserService) {
     // Require form group to have all input fields
     this.contactForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -31,7 +30,6 @@ export class UserDetailsComponent {
       zip: ['', Validators.required],
       country: ['United States', Validators.required]
     });
-    this.httpOptions = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.storage.getToken() }) };
   }
 
   // Function that is called when user submits the form
@@ -43,7 +41,7 @@ export class UserDetailsComponent {
       alert("All required fields must be filled out.");
     } else {
       // Redirect since all fields are filled out
-      this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }, this.httpOptions).subscribe({
+      this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.user.currentToken })}).subscribe({
         next: res => {
           alert(res.message);
           this.router.navigate(['/personal']);

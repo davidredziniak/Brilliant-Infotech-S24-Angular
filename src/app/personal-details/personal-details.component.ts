@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { StorageService } from '../_services/storage.service';
 import { environment } from '../../environments/environment';
-
+import { Router } from '@angular/router';
+import { UserService } from '../_services/user.service';
 @Component({
   selector: 'app-personal-details',
   standalone: true,
@@ -13,10 +13,9 @@ import { environment } from '../../environments/environment';
 })
 export class PersonalDetailsComponent {
   personalForm: FormGroup;
-  httpOptions: { headers: HttpHeaders };
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private storage: StorageService) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private user: UserService) {
     // Require form group to have all input fields
     this.personalForm = this.fb.group({
       occupation: ['', Validators.required],
@@ -25,7 +24,6 @@ export class PersonalDetailsComponent {
       artist: ['', Validators.required],
       musician: ['', Validators.required]
     });
-    this.httpOptions = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.storage.getToken() }) };
 
   }
 
@@ -37,9 +35,10 @@ export class PersonalDetailsComponent {
     if (occupation === "" || hobbies === "" || visited === "" || artist === "" || musician === ""){
       alert("All required fields must be filled out.");
     } else {
-      this.http.post<any>(this.apiUrl + "/personal", { occupation, hobbies, visited, artist, musician }, this.httpOptions).subscribe({
+      this.http.post<any>(this.apiUrl + "/personal", { occupation, hobbies, visited, artist, musician }, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.user.currentToken })}).subscribe({
         next: res => {
           alert(res.message);
+          this.router.navigate(['/home']);
         },
         error: err => {
           alert(err.error.message);
