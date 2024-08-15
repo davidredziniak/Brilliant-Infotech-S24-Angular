@@ -16,7 +16,6 @@ export class UserService {
   }
 
   getUserDetails(): Observable<any> {
-    console.log(this.currentToken);
     return this.http.get<any>(this.apiUrl, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.currentToken }) });
   }
 }
