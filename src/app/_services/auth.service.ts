@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { BehaviorSubject, Observable } from "rxjs";
 
@@ -31,7 +31,7 @@ export class AuthService {
   // Register the user by calling the API
   register(username: string, password: string) {
     this.http
-      .post<any>(this.apiUrl + "/register", { username, password })
+      .post<any>(this.apiUrl + "/register", { username, password }, { headers: new HttpHeaders({ 'skip': 'true' })})
       .subscribe({
         next: (res) => {
           alert("Registration successful.");
@@ -46,7 +46,7 @@ export class AuthService {
   // Login the user if the username and password matches a valid user
   login(username: string, password: string) {
     this.http
-      .post<any>(this.apiUrl + "/login", { username, password })
+      .post<any>(this.apiUrl + "/login", { username, password }, { headers: new HttpHeaders({ 'skip': 'true' })})
       .subscribe({
         next: (res) => {
           this.isLoggedIn = true;

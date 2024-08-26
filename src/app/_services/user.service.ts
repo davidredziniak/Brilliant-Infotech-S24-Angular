@@ -17,10 +17,6 @@ export class UserService {
 
   // API call to fetch user details for home page
   getUserDetails(): Observable<any> {
-    return this.http.get<any>(this.apiUrl, {
-      headers: new HttpHeaders({
-        Authorization: "Bearer " + this.currentToken,
-      }),
-    });
+    return this.http.get<any>(this.apiUrl);
   }
 }

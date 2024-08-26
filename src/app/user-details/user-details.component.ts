@@ -41,7 +41,7 @@ export class UserDetailsComponent {
       alert("All required fields must be filled out.");
     } else {
       // API call to submit user details
-      this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.user.currentToken })}).subscribe({
+      this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }).subscribe({
         next: res => {
           alert(res.message);
           this.router.navigate(['/personal']);
