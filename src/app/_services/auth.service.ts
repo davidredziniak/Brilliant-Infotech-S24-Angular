@@ -17,7 +17,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {
     let storageToken: string | null = null;
-    const token = null;
+    
+    // Update local JWT
     if (this.isLocalStorageAvailable) {
       const token = localStorage.getItem("token");
       if (token) {

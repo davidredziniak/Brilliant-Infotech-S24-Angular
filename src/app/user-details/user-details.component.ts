@@ -32,7 +32,7 @@ export class UserDetailsComponent {
     });
   }
 
-  // Function that is called when user submits the form
+  // Called when user submits the form
   onSubmit() {
     const { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country } = this.contactForm.value;
 
@@ -40,6 +40,7 @@ export class UserDetailsComponent {
     if (firstName === "" || lastName === "" || email === "" || phoneNumber === "" || addressOne === "" || city === "" || state === "" || zip === "" || country === ""){
       alert("All required fields must be filled out.");
     } else {
+      
       // API call to submit user details
       this.http.post<any>(this.apiUrl + "/user", { firstName, lastName, email, phoneNumber, addressOne, addressTwo, city, state, zip, country }).subscribe({
         next: res => {

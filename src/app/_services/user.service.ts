@@ -11,6 +11,7 @@ export class UserService {
   private apiUrl = environment.apiUrl + "/user";
   currentToken: any;
 
+  // Begin subscription to auth service to keep track of current JWT
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.currentToken$.subscribe((value) => (this.currentToken = value));
   }

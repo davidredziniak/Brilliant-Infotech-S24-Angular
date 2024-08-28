@@ -4,11 +4,12 @@ import { CommonModule } from "@angular/common";
 import { AuthService } from "../_services/auth.service";
 import { first } from "rxjs";
 import { Router } from "@angular/router";
+import { TimerComponent } from "../timer/timer.component";
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TimerComponent],
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
 })
@@ -25,9 +26,12 @@ export class HomeComponent implements OnInit {
     this.auth.logout();
   }
 
+  // On initialization, check if user is logged in
+  // Success: Fetch user's details to be displayed
+  // Fail: Redirect to login page
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
-      this.auth.currentToken$.pipe(first()).subscribe((token) => {
+      this.auth.currentToken$.pipe(first()).subscribe(() => {
         this.fetchUserDetails();
       });
     } else {
@@ -35,6 +39,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Get user document with corresponding details from the MongoDB database
   fetchUserDetails(): void {
     if (this.auth.isAuthenticated()) {
       this.userService.getUserDetails().subscribe({
