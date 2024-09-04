@@ -4,6 +4,10 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { BehaviorSubject, Observable } from "rxjs";
 
+interface Alert {
+	type: string;
+	message: string;
+}
 @Injectable({
   providedIn: "root",
 })
@@ -11,7 +15,9 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
   private isLocalStorageAvailable = typeof localStorage !== "undefined";
   private currentTokenSubject: BehaviorSubject<string | null>;
-  
+  alerts: Alert[] = [];
+
+
   currentToken$: Observable<string | null>;
   isLoggedIn: boolean = false;
 
@@ -34,12 +40,20 @@ export class AuthService {
     this.http
       .post<any>(this.apiUrl + "/register", { username, password }, { headers: new HttpHeaders({ 'skip': 'true' })})
       .subscribe({
-        next: (res) => {
-          alert("Registration successful.");
+        next: () => {
+          let alert: Alert = {
+            type: 'success',
+            message: 'Registration successful.'
+          };
+          this.alerts.push(alert);
           this.router.navigate(["/login"]);
         },
         error: (err) => {
-          alert(err.error.message);
+          let alert: Alert = {
+            type: 'danger',
+            message: err.error.message
+          };
+          this.alerts.push(alert);
         },
       });
   }
@@ -58,7 +72,11 @@ export class AuthService {
         },
         error: (err) => {
           this.isLoggedIn = false;
-          alert(err.error.message);
+          let alert: Alert = {
+            type: 'danger',
+            message: err.error.message
+          };
+          this.alerts.push(alert);
         },
       });
   }

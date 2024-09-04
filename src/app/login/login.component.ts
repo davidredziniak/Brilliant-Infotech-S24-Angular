@@ -7,16 +7,23 @@ import {
 } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
 import { AuthService } from "../_services/auth.service";
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
+interface Alert {
+	type: string;
+	message: string;
+}
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, NgbAlert],
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.css",
 })
+
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  alerts: Alert[] = this.auth.alerts;
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +35,12 @@ export class LoginComponent implements OnInit {
       username: ["", Validators.required],
       password: ["", Validators.required],
     });
+    this.alerts = this.auth.alerts;
   }
+
+  close(alert: Alert) {
+		this.alerts.splice(this.alerts.indexOf(alert), 1);
+	}
 
   ngOnInit(): void {
     if (this.auth.isAuthenticated()) {
@@ -42,9 +54,14 @@ export class LoginComponent implements OnInit {
 
     // Check if any fields are empty
     if (username === "" || password === "") {
-      alert("All fields must be filled out.");
+      let alert: Alert = {
+        type: 'warning',
+        message: 'All fields must be filled out.'
+      };
+      this.alerts.push(alert);
       return false;
     }
+    console.log(this.alerts);
 
     // Try to login the user
     this.auth.login(username, password);

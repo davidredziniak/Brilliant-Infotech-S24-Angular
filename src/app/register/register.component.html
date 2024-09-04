@@ -1,4 +1,9 @@
-<h1 class="text-center mt-5">User Registration</h1>
+<h1 class="text-center mt-5 mb-2">User Registration</h1>
+@for (alert of alerts; track alert) {
+  <div class="container w-25 mt-2">
+    <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+  </div>
+}
 <div class="container w-50">
   <form ngNativeValidate [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="user-form container w-50 p-5 mt-5">
     <div>
