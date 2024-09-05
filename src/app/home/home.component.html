@@ -62,14 +62,23 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="container-lg mt-5 p-5 rounded-2" style="background-color: #ffffff">
-                <h5>Personal Details</h5>
-                <hr />
-                <p><b>Occupation:</b> {{ user.personalDetails.occupation }}</p>
-                <p><b>Hobbies:</b> {{ user.personalDetails.hobbies }}</p>
-                <p><b>Cities Visited:</b> {{ user.personalDetails.visited }}</p>
-                <p><b>Favorite Artist:</b> {{ user.personalDetails.artist }}</p>
-                <p><b>Favorite Musician:</b> {{ user.personalDetails.musician }}</p>
+            <div class="container-lg mt-5 p-5 rounded-2  bg-white">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h5>Personal Details</h5>
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <button type="submit" class="minimize-btn" (click)="toggle()">{{ state == 'open' ? '-' : '+' }}</button>
+                    </div>
+                </div>
+                <div class="row" [@submitState]="state">
+                    <hr />
+                    <p><b>Occupation:</b> {{ user.personalDetails.occupation }}</p>
+                    <p><b>Hobbies:</b> {{ user.personalDetails.hobbies }}</p>
+                    <p><b>Cities Visited:</b> {{ user.personalDetails.visited }}</p>
+                    <p><b>Favorite Artist:</b> {{ user.personalDetails.artist }}</p>
+                    <p><b>Favorite Musician:</b> {{ user.personalDetails.musician }}</p>
+                </div>
             </div>
         </div>
     </div>

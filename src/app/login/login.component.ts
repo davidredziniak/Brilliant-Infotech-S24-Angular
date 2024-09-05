@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
       this.alerts.push(alert);
       return false;
     }
-    console.log(this.alerts);
 
     // Try to login the user
     this.auth.login(username, password);
