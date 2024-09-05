@@ -2,7 +2,7 @@ import { trigger, state, query, animateChild, group, style, transition, animate 
 
 export const slideInAnimation =
   trigger('routeAnimations', [
-    transition('One => Two', [
+    transition('One => Two, One => Three, One => Four, One => Five, Three => Four, Four => Five', [
         style({ position: 'relative' }),
 		query(':enter, :leave', [
 			style({
@@ -20,7 +20,7 @@ export const slideInAnimation =
 		]),
 		query(':enter', animateChild())
     ]),
-    transition('Two => One', [
+    transition('Two => One, Five => One', [
 		style({ position: 'relative' }),
 		query(':enter, :leave', [
 			style({

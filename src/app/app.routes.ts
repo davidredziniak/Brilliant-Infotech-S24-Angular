@@ -6,13 +6,13 @@ export const routes: Routes = [
     path: "login",
     loadComponent: () =>
       import("./login/login.component").then((m) => m.LoginComponent),
-    data: { animation: 'One' }
+    data: { animation: "One" },
   },
   {
     path: "register",
     loadComponent: () =>
       import("./register/register.component").then((m) => m.RegisterComponent),
-    data: { animation: 'Two' }
+    data: { animation: "Two" },
   },
   {
     path: "user",
@@ -20,6 +20,7 @@ export const routes: Routes = [
       import("./user-details/user-details.component").then(
         (m) => m.UserDetailsComponent
       ),
+    data: { animation: "Three" },
   },
   {
     path: "personal",
@@ -27,10 +28,12 @@ export const routes: Routes = [
       import("./personal-details/personal-details.component").then(
         (m) => m.PersonalDetailsComponent
       ),
+    data: { animation: "Four" },
   },
   {
     path: "home",
     loadComponent: () =>
       import("./home/home.component").then((m) => m.HomeComponent),
+    data: { animation: "Five" },
   },
 ];
