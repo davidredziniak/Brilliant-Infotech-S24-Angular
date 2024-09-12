@@ -54,8 +54,9 @@ export class SessiontimerService {
     }
   }
 
+  // Clears timeout if it exists
+  // Creates a new timeout
   reset() {
-    console.log("R");
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
